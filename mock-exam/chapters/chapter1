@@ -1,7 +1,7 @@
 1. A
 2. A
 3. C
-4. D x C : overlooked, hashCode variables should be all in equals variables.
+4. D x C : Overlooked, hashCode variables should be all in equals variables.
 5. A,D
 6. B
 7. E
@@ -11,7 +11,7 @@
 11. D
 12. E
 13. F x B : null can be used in instanceof.
-14. E,F x E : if the instanceof is interface then it will always compile.
+14. E,F x E : If the instanceof is interface then it will always compile.
 15. B,E
 16. E
 17. B,C

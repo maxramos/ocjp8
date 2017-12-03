@@ -1,6 +1,6 @@
 1. C,E
 2. E
-3. A,C,D x A,D : overlooked, default and static method should have bodies.
+3. A,C,D x A,D : Overlooked, default and static method should have bodies.
 4. A,D
 5. B,E,F
 6. A
@@ -8,14 +8,14 @@
 8. C,F
 9. D,F
 10. D
-11. A,D,F x A,F : can't reuse variables in the body that are already declared as lambda parameter.
-12. C : different return type, parameter is int but used as Object.
+11. A,D,F x A,F : Can't reuse variables in the body that are already declared as lambda parameter.
+12. C : Different return type, parameter is int but used as Object.
 13. B,C,E,
 14. A,B,D,E
 15. B,C
 16. F
 17. B,C,F
-18. A,B x A,B,E : variables must be accessible to public methods for composition to work.
+18. A,B x A,B,E : Variables must be accessible to public methods for composition to work.
 19. B,D,E
 20. A
 

@@ -1,0 +1,27 @@
+1. B
+2. D
+3. C x E : Remember if it's raw type then the type in for-each loop should be Object.
+4. E
+5. B,C,F
+6. C
+7. D x A,D : Overlooked, select two.
+8. C
+9. E
+10. D x A : Overlooked, be careful with the position of variables in compare() method of Comparator.
+11. A
+12. A,B,D
+13. A,B,E x B,E : Overlooked, ArrayDeque doesn't implement List, the one implementing List and Queue (i.e. Deque) is LinkedList.
+14. C
+15. D
+16. B,D,F
+17. B,D
+18. A,B
+19. A,C x A,D : There is no remove(index) in Queue so it will be autobox to remove(Integer) and since the value (i.e. 1) is not existing then nothing happened.
+20. A x E : Overlooked, there's no contains() method in Map, it's containsKey() or containsValue().
+21. A,F
+22. B
+23. B,E
+24. A,D,F x F : Collection's forEach() method accepts Consumer functional interface thus requires 1 parameter.
+25. F
+
+Score: 18/25
