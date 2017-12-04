@@ -6,6 +6,14 @@ public interface ChildC extends ParentA, ParentB {
 	default void someDefaultMethod() {
 		System.out.println("ChildC.someDefaultMethod");
 	}
+	
+	default void someDefaultMethodA() {
+		ParentA.super.someDefaultMethod();
+	}
+	
+	default void someDefaultMethodB() {
+		ParentB.super.someDefaultMethod();
+	}
 
 	static void someStaticMethod() {
 		System.out.println("ChildC.someStaticMethod");

@@ -22,6 +22,8 @@ public class DefaultStaticMethodTest {
 		
 		ChildC childC = new ConcreteAClass();
 		childC.someMethod();
+		childC.someDefaultMethodA();
+		childC.someDefaultMethodB();
 		childC.someDefaultMethod();
 		ChildC.someStaticMethod();
 		
