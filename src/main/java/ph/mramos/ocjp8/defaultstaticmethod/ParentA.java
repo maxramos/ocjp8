@@ -7,6 +7,10 @@ public interface ParentA {
 	default void someDefaultMethod() {
 		System.out.println("ParentA.someDefaultMethod");
 	}
+	
+	default void someDefaultMethod2() {
+		System.out.println("ParentA.someDefaultMethod");
+	}
 
 	static void someStaticMethod() {
 		System.out.println("ParentA.someStaticMethod");
