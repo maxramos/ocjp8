@@ -35,6 +35,7 @@ public class DefaultStaticMethodTest {
 		concreteAClass.someDefaultMethod();
 		concreteAClass.someDefaultMethod3();
 		concreteAClass.someStaticMethod();
+		ParentA.someStaticMethod2();
 		
 		System.out.println();
 		

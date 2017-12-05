@@ -17,8 +17,4 @@ public class ConcreteAClass extends AbstractChild implements ParentC {
 		ParentC.super.someDefaultMethod3();
 	}
 
-	public static void someStaticMethod() {
-		System.out.println("ConcreteAClass.someStaticMethod");
-	}
-
 }

@@ -15,5 +15,9 @@ public class ConcreteBClass implements ParentA, ParentB {
 	public static void someStaticMethod() {
 		System.out.println("ConcreteBClass.someStaticMethod");
 	}
+	
+//	public void someStaticMethod() {
+//		System.out.println("ConcreteBClass.someStaticMethod");
+//	}
 
 }

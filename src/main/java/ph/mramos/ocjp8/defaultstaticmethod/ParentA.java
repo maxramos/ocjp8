@@ -15,5 +15,9 @@ public interface ParentA {
 	static void someStaticMethod() {
 		System.out.println("ParentA.someStaticMethod");
 	}
+	
+	static void someStaticMethod2() {
+		System.out.println("ParentA.someStaticMethod2");
+	}
 
 }
