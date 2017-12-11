@@ -1,37 +1,106 @@
 package ph.mramos.ocjp8.collections;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.junit.Test;
 
 public class CollectionTest {
 
 	@Test
-	public void testList() {
-		String[] array = {"a", "b"};
-		List<String> list = Arrays.asList(array);
+	public void testIterableForEach() {
+		List<String> list = new ArrayList<>();
+		list.add("a");
+		list.add("bb");
+		list.add("ccc");
+		list.add("dddd");
+		list.add("eeeee");
+		list.add("ffffff");
+
+		list.forEach(System.out::println);
+	}
+	
+	@Test
+	public void testCollectionRemoveIf() {
+		List<String> list = new ArrayList<>();
+		list.add("a");
+		list.add("bb");
+		list.add("ccc");
+		list.add("dddd");
+		list.add("eeeee");
+		list.add("ffffff");
+		System.out.println(list);
+		
+		list.removeIf(e -> e.length() <= 3);
+		System.out.println(list);
+	}
+	
+	@Test
+	public void testListReplaceAll() {
+		List<String> list = new ArrayList<>();
+		list.add("a");
+		list.add("bb");
+		list.add("ccc");
+		list.add("dddd");
+		list.add("eeeee");
+		list.add("ffffff");
+		System.out.println(list);
+		
+		list.replaceAll(String::toUpperCase);
+		System.out.println(list);
+	}
+	
+	@Test
+	public void testListSort() {
+		List<String> list = new ArrayList<>();
+		list.add("a");
+		list.add("bb");
+		list.add("ccc");
+		list.add("dddd");
+		list.add("eeeee");
+		list.add("ffffff");
+		System.out.println(list);
+		
+		list.sort((a, b) -> b.compareTo(a));
+		System.out.println(list);
+	}
+	
+	@Test
+	public void testMapForEach() {
+		Map<String, String> map = new HashMap<>();
+		map.put("a", "a");
+		map.put("bb", "bb");
+		map.put("ccc", "ccc");
+		map.put("dddd", "dddd");
+		map.put("eeeee", "eeeee");
+		map.put("ffffff", "ffffff");
+		
+		map.forEach((k, v) -> System.out.println(k + ":" + v));
+	}
+	
+	@Test
+	public void testMapReplaceAll() {
+		Map<String, String> map = new HashMap<>();
+		map.put("a", "a");
+		map.put("bb", "bb");
+		map.put("ccc", "ccc");
+		map.put("dddd", "dddd");
+		map.put("eeeee", "eeeee");
+		map.put("ffffff", "ffffff");
+		System.out.println(map);
+		
+		map.replaceAll((k, v) -> v.toUpperCase());
+		System.out.println(map);
 	}
 	
 	@Test
 	public void testMap() {
 		Map<String, String> hashMap = new HashMap<>();
-		System.out.println("*** putIfAbsent ***");
-		hashMap.put("hasValue", "Put Value");
-		hashMap.put("hasNoValue", null);
-		hashMap.put("delete", "For Deletion");
-		System.out.println("Size: " + hashMap.size());
-		System.out.println(hashMap);
-		hashMap.putIfAbsent("absent", "Absent Value 1");
-		hashMap.putIfAbsent("hasNoValue", "Absent Value 2");
-		hashMap.putIfAbsent("hasValue", "Absent Value 3");
-		hashMap.putIfAbsent("delete", null);
-		System.out.println("Size: " + hashMap.size());
-		System.out.println(hashMap);
-		System.out.println();
-		hashMap.clear();
 		
 		System.out.println("*** merge ***");
 		hashMap.put("hasValue", "Put Value");
