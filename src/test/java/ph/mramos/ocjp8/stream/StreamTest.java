@@ -14,6 +14,17 @@ import org.junit.Test;
 public class StreamTest {
 
 	@Test
+	@SuppressWarnings("unused")
+	public void testCreation() {
+		Stream<Integer> stream1 = Stream.empty();
+		Stream<Integer> stream2 = Stream.of(1);
+		Stream<Integer> stream3 = Stream.of(1, 2, 3, 4, 5);
+		Stream<Integer> stream4 = Stream.generate(() -> 1);
+		Stream<Integer> stream5 = Stream.iterate(0, e -> e + 1);
+		Stream<Integer> stream6 = Stream.concat(stream2, stream3);
+	}
+	
+	@Test
 	public void testStream() {
 		List<String> list = Arrays.asList("a", "bb", "ccc", "dddd", "eeeee", "eeeee");
 
@@ -67,7 +78,7 @@ public class StreamTest {
 		Set<String> set1 = list.stream().collect(Collectors.toSet());
 		System.out.println(set1);
 
-		Set<String> set2 = list.parallelStream().collect(HashSet::new, (s,e) -> s.add(e), (s1, s2) -> s1.addAll(s2));
+		Set<String> set2 = list.parallelStream().collect(HashSet::new, Set::add, Set::addAll);
 		System.out.println(set2);
 	}
 
