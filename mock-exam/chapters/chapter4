@@ -1,0 +1,22 @@
+1. D
+2. F
+3. F x E : Overlooked, You can only process a stream once.
+4. A,B
+5. A,B
+6. F x A : Overlooked, allMatch is short circuited by 1 false condition, anyMatch by 1 true condition, and noneMatch by 1 true condition (tricky).
+7. F
+8. D,E
+9. B,D
+10. F
+11. B,D x B,C,E : Note of the use of x++ and ++x in Stream.iterate(), x++ doesn't increment the result since 1 is always returned.
+12. A,F,G
+13. F
+14. D
+15. D,E
+16. D x C : PartitioningBy always return a map with 2 keys (false, true) even if stream is empty, GroupingBy will only return keys that are needed so an empty stream will return empty map.
+17. E
+18. D
+19. A,C,E
+20. B
+
+Score: 16/20

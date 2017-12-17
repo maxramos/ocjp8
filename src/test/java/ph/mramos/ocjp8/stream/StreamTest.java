@@ -95,5 +95,12 @@ public class StreamTest {
 		Integer sumParallel = list.parallelStream().reduce(0, (x, y) -> x + y, (x, y) -> x + y);
 		System.out.println(sumParallel);
 	}
+	
+	@Test
+	public void testInfiniteStream() {
+		System.out.println(Stream.iterate("-", e-> e + e).allMatch(e -> e.length() > 3));
+		System.out.println(Stream.iterate("-", e-> e + e).anyMatch(e -> e.length() > 3));
+		System.out.println(Stream.iterate("-", e-> e + e).noneMatch(e -> e.length() > 3));
+	}
 
 }
