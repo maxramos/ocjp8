@@ -97,44 +97,44 @@ public class CollectionTest {
 
 	@Test
 	public void testMapMerge() {
-		System.out.println("1. Will be executed, (k)ey not in map and function result is null; add (k)ey and set 2nd param as (v)alue");
+		System.out.println("1. [key:absent] [value:n/a] [function:null] [result:add key and set value to 2nd param]");
 		Map<String, String> map = new LinkedHashMap<>();
 		map.put("a", "aa");
 		System.out.println(map);
 		map.merge("b", "bb", (k, v) -> null);
 		System.out.println(map);
 
-		System.out.println("\n2. Will be executed, (k)ey not in map and function result is NOT null; add (k)ey and 2nd param as (v)alue");
+		System.out.println("\n2. [key:absent] [value:n/a] [function:non-null] [result:add key and set value to 2nd param]");
 		map = new LinkedHashMap<>();
 		map.put("a", "aa");
 		System.out.println(map);
 		map.merge("b", "bb", (k, v) -> v.toUpperCase());
 		System.out.println(map);
 
-		System.out.println("\n3. Will be executed, (k)ey exists and has (v)alue; remove mapping cause function result is null");
+		System.out.println("\n3. [key:present] [value:null] [function:null] [result:update value to 2nd param]");
 		map = new LinkedHashMap<>();
-		map.put("a", "aa");
+		map.put("a", null);
 		System.out.println(map);
 		map.merge("a", "aaa", (k, v) -> null);
 		System.out.println(map);
 
-		System.out.println("\n4. Will be executed, (k)ey exists and has (v)alue; update (v)alue to function result");
+		System.out.println("\n4. [key:present] [value:null] [function:non-null] [result:update value to 2nd param]");
 		map = new LinkedHashMap<>();
-		map.put("a", "aa");
+		map.put("a", null);
 		System.out.println(map);
 		map.merge("a", "aaa", (k, v) -> v.toUpperCase());
 		System.out.println(map);
-
-		System.out.println("\n5. Will be executed, (k)ey exists and has null (v)alue; update (v)alue to 2nd param");
+		
+		System.out.println("\n5. [key:present] [value:non-null] [function:null] [result:remove mapping]");
 		map = new LinkedHashMap<>();
-		map.put("a", null);
+		map.put("a", "aa");
 		System.out.println(map);
 		map.merge("a", "aaa", (k, v) -> null);
 		System.out.println(map);
 
-		System.out.println("\n6. Will be executed, (k)ey exists and has null (v)alue; update (v)alue to 2nd param");
+		System.out.println("\n6. [key:present] [value:non-null] [function:non-null] [result:update value to function result]");
 		map = new LinkedHashMap<>();
-		map.put("a", null);
+		map.put("a", "aa");
 		System.out.println(map);
 		map.merge("a", "aaa", (k, v) -> v.toUpperCase());
 		System.out.println(map);
@@ -142,89 +142,89 @@ public class CollectionTest {
 
 	@Test
 	public void testMapCompute() {
-		System.out.println("1. Will NOT be executed, (k)ey not in map and function result is null");
+		System.out.println("1. [key:absent] [value:n/a] [function:null] [result:not executed]");
 		Map<String, String> map = new LinkedHashMap<>();
 		map.put("a", "aa");
 		System.out.println(map);
 		map.compute("b", (k, v) -> null);
 		System.out.println(map);
 
-		System.out.println("\n2. Will be executed, (k)ey not in map; add (k)ey and set (v)alue to function result");
+		System.out.println("\n2. [key:absent] [value:n/a] [function:non-null] [result:add key and set value to function result]");
 		map = new LinkedHashMap<>();
 		map.put("a", "aa");
 		System.out.println(map);
 		map.compute("b", (k, v) -> k.toUpperCase());
 		System.out.println(map);
 
-		System.out.println("\n3. Will be executed, (k)ey exists and has (v)alue; remove mapping cause function result is null");
-		map = new LinkedHashMap<>();
-		map.put("a", "aa");
-		System.out.println(map);
-		map.compute("a", (k, v) -> null);
-		System.out.println(map);
-
-		System.out.println("\n4. Will be executed, (k)ey exists and has (v)alue; update (v)alue to function result");
-		map = new LinkedHashMap<>();
-		map.put("a", "aa");
-		System.out.println(map);
-		map.compute("a", (k, v) -> v.toUpperCase());
-		System.out.println(map);
-
-		System.out.println("\n5. Will be executed, (k)ey exists and null (v)alue; remove mapping cause function result is null");
+		System.out.println("\n3. [key:present] [value:null] [function:null] [result:remove mapping]");
 		map = new LinkedHashMap<>();
 		map.put("a", null);
 		System.out.println(map);
 		map.compute("a", (k, v) -> null);
 		System.out.println(map);
 
-		System.out.println("\n6. Will be executed, (k)ey exists and null (v)alue; update (v)alue to function result");
+		System.out.println("\n4. [key:present] [value:null] [function:non-null] [result:update value to function result]");
 		map = new LinkedHashMap<>();
 		map.put("a", null);
 		System.out.println(map);
 		map.compute("a", (k, v) -> k.toUpperCase());
 		System.out.println(map);
+		
+		System.out.println("\n5. [key:present] [value:non-null] [function:null] [result:remove mapping]");
+		map = new LinkedHashMap<>();
+		map.put("a", "aa");
+		System.out.println(map);
+		map.compute("a", (k, v) -> null);
+		System.out.println(map);
+
+		System.out.println("\n6. [key:present] [value:non-null] [function:non-null] [result:update value to function result]");
+		map = new LinkedHashMap<>();
+		map.put("a", "aa");
+		System.out.println(map);
+		map.compute("a", (k, v) -> v.toUpperCase());
+		System.out.println(map);
 	}
 
 	@Test
 	public void testMapComputeIfAbsent() {
-		System.out.println("1. Will NOT be executed, though (k)ey not in map but function result is null");
+		System.out.println("1. [key:absent] [value:n/a] [function:null] [result:not executed]");
 		Map<String, String> map = new LinkedHashMap<>();
 		map.put("a", "aa");
 		System.out.println(map);
 		map.computeIfAbsent("b", k -> null);
 		System.out.println(map);
 
-		System.out.println("\n2. Will be executed, (k)ey not in map; add (k)ey and set (v)alue to function result");
+		System.out.println("\n2. [key:absent] [value:n/a] [function:non-null] [result:add key and set value to function result]");
 		map = new LinkedHashMap<>();
 		map.put("a", "aa");
 		System.out.println(map);
 		map.computeIfAbsent("b", k -> k.toUpperCase());
 		System.out.println(map);
 
-		System.out.println("\n3. Will NOT be executed, (k)ey exists and has (v)alue");
+		System.out.println("\n3. [key:present] [value:null] [function:null] [result:not executed]");
 		map = new LinkedHashMap<>();
-		map.put("a", "aa");
+		map.put("a", null);
 		System.out.println(map);
 		map.computeIfAbsent("a", k -> null);
 		System.out.println(map);
 
-		System.out.println("\n4. Will NOT be executed, (k)ey exists and has (v)alue");
+		System.out.println("\n4. [key:present] [value:null] [function:non-null] [result:update value to function result]");
 		map = new LinkedHashMap<>();
-		map.put("a", "aa");
+		map.put("a", null);
 		System.out.println(map);
 		map.computeIfAbsent("a", k -> k.toUpperCase());
 		System.out.println(map);
-
-		System.out.println("\n5. Will NOT be executed, though null (v)alue but function result is null");
+		
+		System.out.println("\n5. [key:present] [value:non-null] [function:null] [result:not executed]");
 		map = new LinkedHashMap<>();
-		map.put("a", null);
+		map.put("a", "aa");
 		System.out.println(map);
 		map.computeIfAbsent("a", k -> null);
 		System.out.println(map);
 
-		System.out.println("\n6. Will be executed, null (v)alue; update (v)alue to function result");
+		System.out.println("\n6. [key:present] [value:non-null] [function:non-null] [result:not executed]");
 		map = new LinkedHashMap<>();
-		map.put("a", null);
+		map.put("a", "aa");
 		System.out.println(map);
 		map.computeIfAbsent("a", k -> k.toUpperCase());
 		System.out.println(map);
@@ -232,44 +232,44 @@ public class CollectionTest {
 
 	@Test
 	public void testMapComputeIfPresent() {
-		System.out.println("1. Will NOT be executed, (k)ey not in map");
+		System.out.println("1. [key:absent] [value:n/a] [function:null] [result:not executed]");
 		Map<String, String> map = new LinkedHashMap<>();
 		map.put("a", "aa");
 		System.out.println(map);
 		map.computeIfPresent("b", (k, v) -> null);
 		System.out.println(map);
 
-		System.out.println("\n2. Will NOT be executed, (k)ey not in map");
+		System.out.println("\n2. [key:absent] [value:n/a] [function:non-null] [result:not executed]");
 		map = new LinkedHashMap<>();
 		map.put("a", "aa");
 		System.out.println(map);
 		map.computeIfPresent("b", (k, v) -> v.toUpperCase());
 		System.out.println(map);
 
-		System.out.println("\n3. Will be executed, (k)ey exists and has (v)alue; remove mapping cause function result is null");
+		System.out.println("\n3. [key:present] [value:null] [function:null] [result:not executed]");
 		map = new LinkedHashMap<>();
-		map.put("a", "aa");
+		map.put("a", null);
 		System.out.println(map);
 		map.computeIfPresent("a", (k, v) -> null);
 		System.out.println(map);
 
-		System.out.println("\n4. Will be executed, (k)ey exists and has (v)alue; update (v)alue to function result");
+		System.out.println("\n4. [key:present] [value:null] [function:non-null] [result:not executed]");
 		map = new LinkedHashMap<>();
-		map.put("a", "aa");
+		map.put("a", null);
 		System.out.println(map);
 		map.computeIfPresent("a", (k, v) -> v.toUpperCase());
 		System.out.println(map);
-
-		System.out.println("\n5. Will NOT be executed, null (v)alue");
+		
+		System.out.println("\n5. [key:present] [value:non-null] [function:null] [result:remove mapping]");
 		map = new LinkedHashMap<>();
-		map.put("a", null);
+		map.put("a", "aa");
 		System.out.println(map);
 		map.computeIfPresent("a", (k, v) -> null);
 		System.out.println(map);
 
-		System.out.println("\n6. will NOT be executed, null (v)alue");
+		System.out.println("\n6. [key:present] [value:non-null] [function:non-null] [result:update value to function result]");
 		map = new LinkedHashMap<>();
-		map.put("a", null);
+		map.put("a", "aa");
 		System.out.println(map);
 		map.computeIfPresent("a", (k, v) -> v.toUpperCase());
 		System.out.println(map);
