@@ -120,8 +120,9 @@ public class DateTimeTest {
 		System.out.println("ZONE ID");
 		Set<String> zoneIds = ZoneId.getAvailableZoneIds();
 		List<String> sortedZoneIds = zoneIds.stream().sorted().collect(Collectors.toList());
-		sortedZoneIds.forEach(System.out::println);
-		System.out.println("Size: " + sortedZoneIds.size());
+//		sortedZoneIds.forEach(System.out::println);
+//		System.out.println("Size: " + sortedZoneIds.size());
+		zoneIds.stream().filter(zone -> zone.contains("America")).sorted().collect(Collectors.toList()).forEach(System.out::println);
 	}
 	
 	@Test
@@ -238,7 +239,22 @@ public class DateTimeTest {
 		System.out.println("LocalDateTime: " + localDateTime);
 		
 		LocalDateTime localDateTime1 = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-		System.out.println("LocalDateTime1: " + localDateTime);
+		System.out.println("LocalDateTime1: " + localDateTime1);
+	}
+	
+	@Test
+	public void testDayLightSaving() {
+		ZonedDateTime zonedDateTime1 = ZonedDateTime.of(LocalDate.of(2017, Month.MARCH, 12), LocalTime.of(1, 0), ZoneId.of("America/Los_Angeles"));
+		System.out.println(zonedDateTime1);
+		zonedDateTime1 = zonedDateTime1.plusHours(1);
+		System.out.println(zonedDateTime1);
+		
+		System.out.println();
+		
+		ZonedDateTime zonedDateTime2 = ZonedDateTime.of(LocalDate.of(2017, Month.NOVEMBER, 5), LocalTime.of(1, 0), ZoneId.of("America/Los_Angeles"));
+		System.out.println(zonedDateTime2);
+		zonedDateTime2 = zonedDateTime2.plusHours(1);
+		System.out.println(zonedDateTime2);
 	}
 	
 }
