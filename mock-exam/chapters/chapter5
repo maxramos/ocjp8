@@ -1,0 +1,22 @@
+1. A, B
+2. C, D, E
+3. C, D
+4. B
+5. D
+6. D, F
+7. D
+8. C x F : When getting an instance of a dates and times related class the values should be accurate and correct.
+9. F x B : Overlooked, dates and times are immutable, it should be assigned to a variable.
+10. A x E : Overlooked, ofLocalizedTime only outputs time.
+11. B
+12. A, E
+13. B
+14. E x A, C, D : Overlooked, be careful about the getting dates and times instance they might have invalid value.
+15. B, C
+16. A, B, F
+17. E
+18. D
+19. A, B, C
+20. A, E x E : Instant only works in UTC.
+
+Score: 15/20
