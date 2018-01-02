@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
-public class DateTimeTest {
+public class GeneralDateTimeTest {
 
 	@Test
 	public void testCreation() {
