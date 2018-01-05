@@ -17,7 +17,7 @@ import java.time.temporal.TemporalQueries;
 
 import org.junit.Test;
 
-public class DateTimeTest {
+public class LocalDateTest {
 
 	@Test
 	public void testCreation() {
@@ -165,4 +165,5 @@ public class DateTimeTest {
 		System.out.println(LocalDate.now().withYear(2017));
 		System.out.println(LocalDate.now().withYear(2017).withMonth(12).withDayOfMonth(25));
 	}
+	
 }
