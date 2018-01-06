@@ -122,7 +122,7 @@ public class LocalDateTimeTest {
 	
 	@Test
 	public void testMinus() {
-		LocalDateTime ldt = LocalDateTime.of(2017, Month.NOVEMBER, 1, 23, 59,59);
+		LocalDateTime ldt = LocalDateTime.of(2017, Month.NOVEMBER, 1, 23, 59, 59);
 		System.out.println("minusYears: " + ldt.minusYears(1));
 		System.out.println("minusMonths: " + ldt.minusMonths(1));
 		System.out.println("minusWeeks: " + ldt.minusWeeks(1));
@@ -155,9 +155,10 @@ public class LocalDateTimeTest {
 	}
 	
 	@Test
-	public void testToLocalDate_ToLocalTime() {
+	public void testToObj() {
 		System.out.println(LocalDateTime.now().toLocalDate());
 		System.out.println(LocalDateTime.now().toLocalTime());
+		System.out.println(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 	}
 	
 	@Test
