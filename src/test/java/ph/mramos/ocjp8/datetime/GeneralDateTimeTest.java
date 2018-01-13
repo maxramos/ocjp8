@@ -17,6 +17,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAmount;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -255,6 +256,103 @@ public class GeneralDateTimeTest {
 		System.out.println(zonedDateTime2);
 		zonedDateTime2 = zonedDateTime2.plusHours(1);
 		System.out.println(zonedDateTime2);
+	}
+	
+	@Test
+	public void testManipulationWithTemporalAmount() {
+		Period period = Period.of(1, 1, 1);
+		Duration duration = Duration.ofDays(1);
+		System.out.println("LocalDate.plus(Period): " + LocalDate.now().plus(period));
+//		System.out.println("LocalDate.plus(Duration): " + LocalDate.now().plus(duration)); // Throws exception
+//		System.out.println("LocalTime.plus(Period): " + LocalTime.now().plus(period)); // Throws exception
+		System.out.println("LocalTime.plus(Duration): " + LocalTime.now().plus(duration));
+		System.out.println("LocalDateTime.plus(Period): " + LocalDateTime.now().plus(period));
+		System.out.println("LocalDateTime.plus(Duration): " + LocalDateTime.now().plus(duration));
+		System.out.println("ZonedDateTime.plus(Period): " + ZonedDateTime.now().plus(period));
+		System.out.println("ZonedDateTime.plus(Duration): " + ZonedDateTime.now().plus(duration));
+//		System.out.println("Instant.plus(Period): " + Instant.now().plus(period)); // Throws exception
+		System.out.println("Instant.plus(Duration): " + Instant.now().plus(duration));
+	}
+	
+	@Test
+	public void testConversion() {
+		LocalDate date = LocalDate.now();
+		LocalTime time = LocalTime.now();
+		LocalDateTime ldt = LocalDateTime.now();
+		ZonedDateTime zdt = ZonedDateTime.now();
+		Instant inst = Instant.now();
+		ZoneId zone = ZoneId.of("Asia/Kolkata");
+		ZoneOffset offset = ZoneOffset.of("+05:30");
+		System.out.println("LocalDate: " + date);
+		System.out.println("LocalTime: " + time);
+		System.out.println("LocalDateTime: " + ldt);
+		System.out.println("ZonedDateTime: " + zdt);
+		System.out.println("Instant: " + inst);
+		System.out.println("ZoneId: " + zone);
+		System.out.println("ZoneOffset: " + offset);
+		System.out.println();
+		
+		LocalDateTime ldt1 = date.atTime(time);
+		LocalDateTime ldt2 = date.atStartOfDay();
+		System.out.println("LocalDate TO LocalDateTime");
+		System.out.println("date.atTime(time): " + ldt1);
+		System.out.println("date.atStartOfDay(): " + ldt2);
+		System.out.println();
+		
+		ZonedDateTime zdt1 = date.atStartOfDay(zone);
+		System.out.println("LocalDate TO ZonedDateTime");
+		System.out.println("date.atStartOfDay(zone): " + zdt1);
+		System.out.println();
+		
+		LocalDateTime ldt3 = time.atDate(date);
+		System.out.println("LocalTime TO LocalDateTime");
+		System.out.println("time.atDate(date): " + ldt3);
+		System.out.println();
+		
+		LocalDate date1 = ldt.toLocalDate();
+		System.out.println("LocalDateTime TO LocalDate");
+		System.out.println("ldt.toLocalDate(): " + date1);
+		System.out.println();
+		
+		LocalTime time1 = ldt.toLocalTime();
+		System.out.println("LocalDateTime TO LocalTime");
+		System.out.println("ldt.toLocalTime(): " + time1);
+		System.out.println();
+		
+		ZonedDateTime zdt2 = ldt.atZone(zone);
+		System.out.println("LocalDateTime TO ZonedDateTime");
+		System.out.println("ldt.atZone(zone): " + zdt2);
+		System.out.println();
+		
+		Instant inst1 = ldt.toInstant(offset);
+		System.out.println("LocalDateTime TO Instant");
+		System.out.println("ldt.toInstant(offset): " + inst1);
+		System.out.println();
+		
+		LocalDate date2 = zdt.toLocalDate();
+		System.out.println("ZonedDateTime TO LocalDate");
+		System.out.println("zdt.toLocalDate(): " + date2);
+		System.out.println();
+		
+		LocalTime time2 = zdt.toLocalTime();
+		System.out.println("ZonedDateTime TO LocalTime");
+		System.out.println("zdt.toLocalTime(): " + time2);
+		System.out.println();
+		
+		LocalDateTime ldt4 = zdt.toLocalDateTime();
+		System.out.println("ZonedDateTime TO LocalDateTime");
+		System.out.println("zdt.toLocalDateTime(): " + ldt4);
+		System.out.println();
+		
+		Instant inst2 = zdt.toInstant();
+		System.out.println("ZonedDateTime TO Instant");
+		System.out.println("zdt.toInstant(): " + inst2);
+		System.out.println();
+		
+		ZonedDateTime zdt3 = inst.atZone(zone);
+		System.out.println("Instant TO ZonedDateTime");
+		System.out.println("inst.atZone(zone): " + zdt3);
+		System.out.println();
 	}
 	
 }
