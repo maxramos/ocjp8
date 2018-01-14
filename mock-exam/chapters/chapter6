@@ -1,0 +1,22 @@
+1. C
+2. A, B, C x B, C : Overlooked, when a checked exception is thrown in close() method then it must be declared. 
+3. E
+4. A, B
+5. C
+6. G
+7. C
+8. B, C
+9. A, D
+10. E x A, E : assert is a reserved keyword thus it can't be used as a variable name.
+11. B, D, E
+12. A, D, E
+13. A
+14. F
+15. B, E
+16. C
+17. A, B
+18. B
+19. B, E x D : Catch runtime exception when rethrown doesn't need to match the declared exception in the method signature.
+20. E
+
+Score: 17/20
