@@ -10,7 +10,7 @@ import java.util.concurrent.Future;
 
 import org.junit.Test;
 
-public class ThreadTest {
+public class ConcurrencyTest {
 
 	@Test
 	public void testRunnable() {
