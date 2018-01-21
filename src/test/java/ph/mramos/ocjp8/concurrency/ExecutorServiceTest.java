@@ -3,34 +3,16 @@ package ph.mramos.ocjp8.concurrency;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
-public class ConcurrencyTest {
-
-	@Test
-	public void testRunnable() {
-		Runnable runnable = () -> {
-			for (int i = 0; i < 100; i++) {
-				System.out.println("Test");
-			}
-		};
-
-		Thread thread = new Thread(runnable);
-		thread.start();
-
-		for (int i = 0; i < 100; i++) {
-			System.out.println("Start");
-		}
-
-		for (int i = 0; i < 100; i++) {
-			System.out.println("End");
-		}
-	}
+public class ExecutorServiceTest {
 
 	@Test
 	public void testExecute() {
@@ -67,7 +49,9 @@ public class ConcurrencyTest {
 				System.out.println("End");
 			}
 		} finally {
-			es.shutdown();
+			if (es != null) {				
+				es.shutdown();
+			}
 		}
 	}
 
@@ -111,7 +95,9 @@ public class ConcurrencyTest {
 			System.out.println("Result2: " + future2.get());
 			System.out.println("Result3: " + future3.get());
 		} finally {
-			es.shutdown();
+			if (es != null) {				
+				es.shutdown();
+			}
 		}
 	}
 
@@ -166,7 +152,9 @@ public class ConcurrencyTest {
 			System.out.println("Result2: " + future2.get());
 			System.out.println("Result3: " + future3.get());
 		} finally {
-			es.shutdown();
+			if (es != null) {				
+				es.shutdown();
+			}
 		}
 	}
 
@@ -218,7 +206,9 @@ public class ConcurrencyTest {
 				}
 			});
 		} finally {
-			es.shutdown();
+			if (es != null) {				
+				es.shutdown();
+			}
 		}
 	}
 
@@ -264,7 +254,61 @@ public class ConcurrencyTest {
 
 			System.out.println("Result: " + result);
 		} finally {
-			es.shutdown();
+			if (es != null) {				
+				es.shutdown();
+			}
+		}
+
+		if (es.isShutdown()) {
+			System.out.println("Shutdownned...");
+		}
+		
+		if (es != null) {
+			es.awaitTermination(5, TimeUnit.SECONDS);
+			
+			if (es.isTerminated()) {
+				System.out.println("Terminated...");
+			}
+		}
+	}
+	
+	@Test
+	public void testFuture() throws InterruptedException, ExecutionException {
+		Callable<String> callable = () -> {
+			for (int i = 0; i < 10000; i++) {
+				System.out.println("Test1");
+			}
+
+			return "Test1";
+		};
+
+		ExecutorService es = null;
+		try {
+			es = Executors.newSingleThreadExecutor();
+			Future<String> future = es.submit(callable);
+			Thread.sleep(100);
+			
+			if (!future.isCancelled()) {
+				System.out.println("Not yet cancelled...");
+				future.cancel(true);
+				System.out.println("Cancel triggered...");
+			}
+			
+			if (future.isCancelled()) {
+				System.out.println("Task cancelled...");
+			}
+			
+			if (future.isDone()) {
+				System.out.println("Task done...");
+			}
+			
+			System.out.println("Result: " + future.get());
+		} catch (CancellationException e) {
+			System.out.println("Cancelled");
+		} finally {
+			if (es != null) {				
+				es.shutdown();
+			}
 		}
 	}
 
