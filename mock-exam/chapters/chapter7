@@ -5,7 +5,7 @@
 5. D
 6. B
 7. A
-8. A x G : Using findAny() on a sorted stream (both sequential and parallel) doesn't guarantee it will return the first record.
+8. A x G : Using findAny() on a sorted stream (both sequential and parallel) doesn't guarantee it will return the first record. Use findFirst() to return the first record.
 9. A, C, E
 10. A x C : In a reduce(int, (a1, a2) -> a1.length() + a2, (c1, c2) -> c1 + c2), a2 is an int because the identity is an int.
 11. A, F
