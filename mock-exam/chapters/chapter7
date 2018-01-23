@@ -5,18 +5,20 @@
 5. D
 6. B
 7. A
-8. A
+8. A x G : Using findAny() on a sorted stream (both sequential and parallel) doesn't guarantee it will return the first record.
 9. A, C, E
-10. A
+10. A x C : In a reduce(int, (a1, a2) -> a1.length() + a2, (c1, c2) -> c1 + c2), a2 is an int because the identity is an int.
 11. A, F
 12. E
-13. A
-14. A
+13. A x A, G : Overlook, flatMap() returns a sequential stream. for a collect to run in parallel it must satisfy the 3 conditions. 
+14. A x D : All methods of concurrent queue and deque with TimeUnit throws a check exception InterruptedException thus must be handled or declared. 
 15. C, E, G
-16. F
-17. C
+16. F x F, H : Overlooked, remember that ExecutorService must be shutdown or else the program will never terminate.
+17. C x B : Overlooked, remember that in single thread executor task are never executed concurrently thus result is predictable.
 18. F
 19. A, F
 20. A, D
-21. A
+21. A x A, C, D, E : Question is very vague, it means all possible scenarios so can have both null and non null result, can also have exceptions or can hand indefinitely.
 22. F
+
+Score: 15/22
