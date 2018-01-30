@@ -1,0 +1,22 @@
+1.
+2.
+3.
+4.
+5.
+6.
+7. A, H x A, B, C, H : Result it indeterminate, it may run in parallel or it may run sequentially, even if it's a parallel stream it may run sequentially so results can be determined.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+17.
+18. B, C, D x A, B, C, D : Not releasing locks causes the program to hang indefinitely. Using executor service does not give any guarantee of the order of the execution. A read lock must be unlock first for a write lock to push through and vice versa, otherwise program will hang indefinitely.
+19.
+20.
+21. A, C, D
+
