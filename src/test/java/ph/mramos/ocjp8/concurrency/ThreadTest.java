@@ -25,6 +25,7 @@ public class ThreadTest {
 	}
 
 	@Test
+	@SuppressWarnings("unused")
 	public void testWaitNotify() throws InterruptedException {
 		Object obj = new Object();
 		System.out.println("Start");
