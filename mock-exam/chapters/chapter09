@@ -1,20 +1,22 @@
-1. E
-2. C
+1. E x F : Overlooked, should use Paths.get; relativize() accepts Path not String; Path methods returns a new Path object instead of modifying its own instance, be careful with not assigning result. 
+2. C x B, C : Vague, Files.isDirectory() follows symbolic link by default; When a symbolic link is given to Files.delete() then the symbolic link is deleted instead of the actual file.
 3. D
-4. A
-5. B, D
-6. A
+4. A x C : 
+5. B, D x B, C, D:
+6. A x C : 
 7. F
 8. A
 9. B, C
-10. B
+10. B x C, E :
 11. A
-12. A, F, G
+12. A, F, G x A, F :
 13. B
 14. E
 15. D, E, F
-16. E, F
-17. G
-18. A
+16. E, F x F : 
+17. G x A, G :
+18. A x D : 
 19. A, C, E
 20. B
+
+Score: 10/20
