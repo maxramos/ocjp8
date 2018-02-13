@@ -94,8 +94,12 @@ public class FilesTest {
 	public void testFileAttributes() throws IOException {
 		BasicFileAttributes attributes = Files.readAttributes(Paths.get("dir\\test-attribute"), BasicFileAttributes.class);
 		System.out.println(attributes.lastModifiedTime());
+		System.out.println(attributes.size());
+
+		System.out.println();
 
 		BasicFileAttributeView view = Files.getFileAttributeView(Paths.get("dir\\test-attribute"), BasicFileAttributeView.class);
+		System.out.println(view.name());
 		System.out.println(view.readAttributes().lastModifiedTime());
 	}
 
