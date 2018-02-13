@@ -94,4 +94,11 @@ public class FilesTest {
 		System.out.println(view.readAttributes().lastModifiedTime());
 	}
 
+	@Test
+	public void testWalk() throws IOException {
+		Files.walk(Paths.get("dir\\subdir")).forEach(file -> System.out.println(file.toAbsolutePath()));
+		System.out.println();
+		Files.walk(Paths.get("dir\\subdir"), 1).forEach(file -> System.out.println(file.toAbsolutePath()));
+	}
+
 }
