@@ -1,13 +1,13 @@
 1. E x F : Overlooked, should use Paths.get; relativize() accepts Path not String; Path methods returns a new Path object instead of modifying its own instance, be careful with not assigning result. 
 2. C x B, C : Vague, Files.isDirectory() follows symbolic link by default; When a symbolic link is given to Files.delete() then the symbolic link is deleted instead of the actual file.
 3. D
-4. A x C : 
-5. B, D x B, C, D:
-6. A x C : 
-7. F
-8. A
+4. A x C : Path.subpath(inc, exc) and Path.getName(index) are zero indexed.
+5. B, D x B, C, D: Overlooked, symbolic link to a directory can act like a drirectory.
+6. A x C : Overlooked, Files.walk return Stream<Path> thus the filter() method accepts Predicate and not BiPredicate.
+7. F : Files.isSameFile checks first using equals if the 2 paths are equal, if not then it checks the file system throwing NoSuchFileException if file does not exist.
+8. A : Path.resolve returns the param path if it's absolute, otherwise concat the param to the instance it was called.
 9. B, C
-10. B x C, E :
+10. B x C, E : Files.move by default does not override, use StandardCopyOption.REPLACE_EXISTING; if NOFOLLOW_LINKS is given then the link itself instead of the file it is pointing to gets moved.
 11. A
 12. A, F, G x A, F :
 13. B
