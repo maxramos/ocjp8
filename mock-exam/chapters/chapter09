@@ -9,14 +9,14 @@
 9. B, C
 10. B x C, E : Files.move by default does not override, use StandardCopyOption.REPLACE_EXISTING; if NOFOLLOW_LINKS is given then the link itself instead of the file it is pointing to gets moved.
 11. A
-12. A, F, G x A, F :
-13. B
+12. A, F, G x A, F : Overlooked, Paths.get() can get a Path instance.
+13. B : Files.find depends on the number of level to search, 0 means only the top level will be searched.
 14. E
 15. D, E, F
-16. E, F x F : 
-17. G x A, G :
-18. A x D : 
+16. E, F x F : Overlooked, should read the question carefully to know the assumptions.
+17. G x A, G : Permission issues, reading the root directory might not be possible.
+18. A x D : Non normalize Path will never be equal evn if they point to the same file.
 19. A, C, E
-20. B
+20. B : Noramalize() doesn't convert relative path to absolute path so if it's only the current directory (i.e. ".") then it will be retained.
 
 Score: 10/20
