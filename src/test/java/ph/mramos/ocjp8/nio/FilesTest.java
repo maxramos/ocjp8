@@ -189,4 +189,11 @@ public class FilesTest {
 		});
 	}
 
+	@Test
+	public void testCreateTempFile() throws IOException {
+		Path path = Paths.get("dir\\subdir");
+		Files.createTempFile(path, "tempprefix-", "-tempsuffix");
+		// tempprefix-1649614728757491846-tempsuffix
+	}
+
 }
