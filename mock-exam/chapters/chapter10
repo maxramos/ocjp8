@@ -1,1 +1,22 @@
-1.
+1. B,D,F x B,F : DriverManager and its implementation are part of the JDK and not of the JDBC Driver.
+2. B,C,D x B,C : jdbc, vendor/product name, db name; location (IP, port) are optional.
+3. A
+4. E
+5. C
+6. B,E
+7. C,E,F
+8. E
+9. B
+10. A x C x Will still result to update even if the value to be assigned is the same column to be updated.
+11. C x D : SQLException is a checked exception thus it needs to be handled or declared.
+12. D
+13. A x D : When another query is executed on the same statement then the previous statement will be closed together with its ResultSet thus the ResultSet cannot be used anymore and will throw exception if tried to.
+14. B,F
+15. F
+16. E
+17. C,D 
+18. E x A : Vague, Cannot call absolute() if ResultSet type is forward only which is the default.
+19. D x C: Overlooked, out of bounds index will result to absolute() and relative() returning false.
+20. F
+
+Score: 13/20
