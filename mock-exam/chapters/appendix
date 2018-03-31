@@ -1,22 +1,23 @@
-1.
-2.
-3.
-4.
-5.
-6.
-7. A, H x A, B, C, H : Result it indeterminate, it may run in parallel or it may run sequentially, even if it's a parallel stream it may run sequentially so results can be determined.
-8.
-9.
-10.
-11.
-12.
-13.
-14.
-15.
-16.
-17.
-18. B, C, D x A, B, C, D : Not releasing locks causes the program to hang indefinitely. Using executor service does not give any guarantee of the order of the execution. A read lock must be unlock first for a write lock to push through and vice versa, otherwise program will hang indefinitely.
-19.
-20.
-21. A, C, D
+1. B
+2. D
+3. A,E
+4. F
+5. D : SimpleFileVisitor can be extended instead of implementing FileVisitor.
+6. B,D,E x B,C : Cases should not have duplicate values even if one is in a constant variable; You can cast and do arithmetic operations in Cases as long as results are known in compile time.
+7. A,H x A,B,C,H : Result it indeterminate, it may run in parallel or it may run sequentially, even if it's a parallel stream it may run sequentially so results can be determined.
+8. B,C x A,B,C : You can also use generics on the left side only of the assignments.
+9. A x A,F : You can assign integer literals directly without casting to byte, short, char provided the value is in range of the specified type, remember that some types have range with both positive and negative (e.g. byte -128 - 127).
+10. A,D
+11. A x C : Overlooked, parse() throws a ParseExecption thus needs to be handled or declared.
+12. D
+13. A x A,E : Vague, code CAN throw and not sure to throw IOException.
+14. B,C,D
+15. E : floating point values cannot be used in switch and cases.
+16. B,F
+17. B,E
+18. B,C,D x A,B,C,D : Not releasing locks causes the program to hang indefinitely. Using executor service does not give any guarantee of the order of the execution. A read lock must be unlock first for a write lock to push through and vice versa, otherwise program will hang indefinitely.
+19. A,E 
+20. A,D,E,F x D,E,F : Infinite loop is not mandatory in WatchService logic.
+21. A,C,D
 
+Score: 13/21

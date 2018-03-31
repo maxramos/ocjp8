@@ -206,8 +206,9 @@ public class FilesTest {
 
 	@Test
 	public void testDirectoryStream() throws IOException {
-		DirectoryStream<Path> ds = Files.newDirectoryStream(Paths.get("dir/subdir"));
-		ds.forEach(p -> System.out.println(p.toAbsolutePath()));
+		try (DirectoryStream<Path> ds = Files.newDirectoryStream(Paths.get("dir/subdir"))) {
+			ds.forEach(p -> System.out.println(p.toAbsolutePath()));
+		}
 	}
 
 	@Test
