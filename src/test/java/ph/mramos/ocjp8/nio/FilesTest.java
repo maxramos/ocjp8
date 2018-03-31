@@ -2,12 +2,20 @@ package ph.mramos.ocjp8.nio;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.UserPrincipal;
@@ -24,8 +32,8 @@ public class FilesTest {
 		Path pwd = Paths.get(".").toRealPath();
 		System.out.println(pwd);
 
-		Path path1 = Paths.get("dir\\subdir1\\test-copy");
-		Path path2 = Paths.get("dir\\subdir2\\new-copy");
+		Path path1 = Paths.get("dir/subdir1/test-copy");
+		Path path2 = Paths.get("dir/subdir2/new-copy");
 
 		if (Files.exists(path1)) {
 			Path path3 = Files.copy(path1, path2, StandardCopyOption.REPLACE_EXISTING);
@@ -42,8 +50,8 @@ public class FilesTest {
 
 	@Test
 	public void testMove() throws IOException {
-		Path path1 = Paths.get("dir\\subdir1\\test-move");
-		Path path2 = Paths.get("dir\\subdir2\\new-move");
+		Path path1 = Paths.get("dir/subdir1/test-move");
+		Path path2 = Paths.get("dir/subdir2/new-move");
 
 		if (Files.exists(path1)) {
 			Path path3 = Files.move(path1, path2);
@@ -58,8 +66,8 @@ public class FilesTest {
 
 	@Test
 	public void testDelete() throws IOException {
-		Path path1 = Paths.get("dir\\subdir1\\test-delete");
-		Path path2 = Paths.get("dir\\subdir2\\new-delete");
+		Path path1 = Paths.get("dir/subdir1/test-delete");
+		Path path2 = Paths.get("dir/subdir2/new-delete");
 
 		if (Files.exists(path1)) {
 			Files.copy(path1, path2);
@@ -74,8 +82,8 @@ public class FilesTest {
 
 	@Test
 	public void testRealAllLines() throws IOException {
-		Path path1 = Paths.get("dir\\subdir1\\test-copy");
-		Path path2 = Paths.get("dir\\subdir2\\new-copy");
+		Path path1 = Paths.get("dir/subdir1/test-copy");
+		Path path2 = Paths.get("dir/subdir2/new-copy");
 
 		if (Files.exists(path1)) {
 			Files.readAllLines(path1).forEach(System.out::println);
@@ -92,49 +100,49 @@ public class FilesTest {
 
 	@Test
 	public void testFileAttributes() throws IOException {
-		BasicFileAttributes attributes = Files.readAttributes(Paths.get("dir\\test-attribute"), BasicFileAttributes.class);
+		BasicFileAttributes attributes = Files.readAttributes(Paths.get("dir/test-attribute"), BasicFileAttributes.class);
 		System.out.println(attributes.lastModifiedTime());
 		System.out.println(attributes.size());
 
 		System.out.println();
 
-		BasicFileAttributeView view = Files.getFileAttributeView(Paths.get("dir\\test-attribute"), BasicFileAttributeView.class);
+		BasicFileAttributeView view = Files.getFileAttributeView(Paths.get("dir/test-attribute"), BasicFileAttributeView.class);
 		System.out.println(view.name());
 		System.out.println(view.readAttributes().lastModifiedTime());
 	}
 
 	@Test
 	public void testWalk() throws IOException {
-		Files.walk(Paths.get("dir\\subdir")).forEach(file -> System.out.println(file.toAbsolutePath()));
+		Files.walk(Paths.get("dir/subdir")).forEach(file -> System.out.println(file.toAbsolutePath()));
 		System.out.println();
-		Files.walk(Paths.get("dir\\subdir"), 1).forEach(file -> System.out.println(file.toAbsolutePath()));
+		Files.walk(Paths.get("dir/subdir"), 1).forEach(file -> System.out.println(file.toAbsolutePath()));
 	}
 
 	@Test
 	public void testFind() throws IOException {
-		Files.find(Paths.get("dir\\subdir"), Integer.MAX_VALUE, (p, b) -> p.toString().endsWith(".txt") && b.isRegularFile()).forEach(p -> System.out.println(p.toAbsolutePath()));
+		Files.find(Paths.get("dir/subdir"), Integer.MAX_VALUE, (p, b) -> p.toString().endsWith(".txt") && b.isRegularFile()).forEach(p -> System.out.println(p.toAbsolutePath()));
 	}
 
 	@Test
 	public void testList() throws IOException {
-		Files.list(Paths.get("dir\\subdir")).forEach(p -> System.out.println(p.toAbsolutePath()));
+		Files.list(Paths.get("dir/subdir")).forEach(p -> System.out.println(p.toAbsolutePath()));
 	}
 
 	@Test
 	public void testLines() throws IOException {
-		Files.lines(Paths.get("dir\\subdir\\test-file1")).map(str -> str.toUpperCase()).forEach(System.out::println);
+		Files.lines(Paths.get("dir/subdir/test-file1")).map(str -> str.toUpperCase()).forEach(System.out::println);
 		System.out.println();
-		Files.readAllLines(Paths.get("dir\\subdir\\test-file2")).forEach(System.out::println);
+		Files.readAllLines(Paths.get("dir/subdir/test-file2")).forEach(System.out::println);
 	}
 
 	@Test
 	public void testCreateFiles() throws IOException {
-		Files.createDirectories(Paths.get("dir\\subdir3\\subsubdir1"));
-		Files.createDirectories(Paths.get("dir\\subdir3\\subsubdir2"));
+		Files.createDirectories(Paths.get("dir/subdir3/subsubdir1"));
+		Files.createDirectories(Paths.get("dir/subdir3/subsubdir2"));
 
-		Path path1 = Paths.get("dir\\subdir3\\test-file1");
-		Path path2 = Paths.get("dir\\subdir3\\subsubdir1\\test-file2");
-		Path path3 = Paths.get("dir\\subdir3\\subsubdir2\\test-file3");
+		Path path1 = Paths.get("dir/subdir3/test-file1");
+		Path path2 = Paths.get("dir/subdir3/subsubdir1/test-file2");
+		Path path3 = Paths.get("dir/subdir3/subsubdir2/test-file3");
 
 		if (Files.notExists(path1)) {
 			Files.createFile(path1);
@@ -172,12 +180,12 @@ public class FilesTest {
 			writer.println();
 		}
 
-		Files.walk(Paths.get("dir\\subdir3")).forEach(p -> System.out.println(p.toAbsolutePath()));
+		Files.walk(Paths.get("dir/subdir3")).forEach(p -> System.out.println(p.toAbsolutePath()));
 	}
 
 	@Test
 	public void testDeleteFiles() throws IOException {
-		Path dir = Paths.get("dir\\subdir3");
+		Path dir = Paths.get("dir/subdir3");
 		List<Path> paths = Files.walk(dir).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 		paths.forEach(System.out::println);
 		paths.forEach(p -> {
@@ -191,9 +199,80 @@ public class FilesTest {
 
 	@Test
 	public void testCreateTempFile() throws IOException {
-		Path path = Paths.get("dir\\subdir");
+		Path path = Paths.get("dir/subdir");
 		Files.createTempFile(path, "tempprefix-", "-tempsuffix");
 		// tempprefix-1649614728757491846-tempsuffix
+	}
+
+	@Test
+	public void testDirectoryStream() throws IOException {
+		DirectoryStream<Path> ds = Files.newDirectoryStream(Paths.get("dir/subdir"));
+		ds.forEach(p -> System.out.println(p.toAbsolutePath()));
+	}
+
+	@Test
+	public void testFileVisitor() throws IOException {
+		FileVisitor<Path> fv = new SimpleFileVisitor<Path>() {
+			@Override
+			public FileVisitResult preVisitDirectory(Path path, BasicFileAttributes attrs) throws IOException {
+				System.out.println("Pre Dir: " + path);
+
+				if (path.getFileName().toString().startsWith("temp")) {
+					return FileVisitResult.SKIP_SUBTREE;
+				}
+
+				return FileVisitResult.CONTINUE;
+			}
+
+			@Override
+			public FileVisitResult postVisitDirectory(Path path, IOException exc) throws IOException {
+				System.out.println("Post Dir: " + path);
+				return FileVisitResult.TERMINATE;
+			}
+
+			@Override
+			public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
+				System.out.println("File:" + path);
+				return FileVisitResult.CONTINUE;
+			}
+		};
+
+		Files.walkFileTree(Paths.get("dir/subdir3"), fv);
+	}
+
+	@Test
+	public void testWatchService() throws IOException {
+		try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
+			Path path = Paths.get("dir/subdir4");
+			path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
+
+			for (;;) {
+				WatchKey watchKey;
+
+				try {
+					watchKey = watchService.take();
+				} catch (InterruptedException e) {
+					break;
+				}
+
+				for (WatchEvent<?> event : watchKey.pollEvents()) {
+					WatchEvent.Kind<?> watchEventKind = event.kind();
+
+					if (watchEventKind == StandardWatchEventKinds.OVERFLOW) {
+						continue;
+					}
+
+					@SuppressWarnings("unchecked")
+					WatchEvent<Path> watchEvent = (WatchEvent<Path>) event;
+					Path context = watchEvent.context();
+					System.out.println("Kind: " + watchEventKind + ", Count: " + watchEvent.count() + ", Path: " + context);
+				}
+
+				if (!watchKey.reset()) {
+					break;
+				}
+			}
+		}
 	}
 
 }
