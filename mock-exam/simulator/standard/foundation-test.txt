@@ -1,0 +1,7 @@
+- method call() of Callable can throw Exception.
+- ConcurrentMap has some of its method that runs atomically unlike Map.
+- when exception is thrown in try of try-with-resource and an exception is thrown while implicitly closing the resource then that exception is suppressed in favor of the one in the try clause.
+- WatchService take() method waits indefinitely while poll() retrieves immediately possibly returning null; poll(long, TimeUnit) wait until timeout.
+
+19. PathMatcher functional interface has this method:
+boolean matches(Path path)
