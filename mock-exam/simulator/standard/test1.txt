@@ -1,0 +1,40 @@
+- ConcurrentHashMap cannot have null keys or null values.
+- StandardOpenOption.DSYNC sync the contents only; StandardOpenOption.SYNC sync both the metadata and content.
+- Grouping By:
+ Collectors.groupingBy(Function classifier)
+ Collectors.groupingBy(Function classifier, Collector downstream)
+ Collectors.groupingBy(Function classifier, Supplier mapFactory, Collector downstream)
+- StandardOpenOption.CREATE without the StandardOpenOption.TRUNCATE_EXISTING will overwrite the file starting from the beginning and previous content will be retained if not overwritten.
+- Remember the difference between List<?> and List<Object>
+ List<?> list1 = new ArrayList<String>(); // Valid
+ List<Object> list2 = new  ArrayList<String>(); // Not Valid
+ list1.add("some string"); // Not allowed
+ list2.add("some string"); // Allowed if declaration is change to new ArrayList<>() or new ArrayList<Object>()
+- Valid in Java 8 but not in Java 7
+ List<String> list = new ArrayList<>();
+ list.addAll(new ArrayList<>());
+- read lock can be acquired by one or multiple threads only if no thread has the write lock.
+  write lock can only be acquired by 1 thread and only if there's no thread that has acquired both the read and write lock. 
+
+10. Overlooked, Remember that compilation error is detected for all the source code and NOT the first compilation error only. So check all the code.
+11. Overlooked, Remember that in Stream if a terminal operation has not been called then no processing will occur even if you have a peek() somewhere in between.
+12. Lock.lock() and Lock.unlock() have no return values (i.e. void) while Lock.tryLock() returns boolean.
+22. To Map:
+ Collectors.toMap(Function keyMapper, Function valueMapper) does not accept duplicate.
+ Collectors.toMap(Function keyMapper, Function valueMapper, BinaryOperator mergeFunction) can accept duplicate because of the 3rd param.
+ Collectors.toMap(Function keyMapper, Function valueMapper, BinaryOperator mergeFunction, Supplier mapSupplier)
+23. Overlooked, trace carefully when going through a threading question.
+24. In ConcurrentHashMap, getting its entry set will make the set backed by the map; you can remove element in the set and it will be reflected back to the map but you can't add element.
+25. Overlooked, user error.
+27. You can have multiple underscore in succession in a literal (e.g. 1____3)
+30. Overlooked, Glob pattern should be **.java to be able to match Paths across directory boundaries otherwise *.java will only match those that are in the root of the tree and not in absolute path.
+32. Remember that Period deals with Date thus it will NOT be affected by the Day Light Saving while Duration will be affected since it deals with Time.
+39. Patterns letters of 4 or more will yield a full text.
+44. DateFormat has separate static methods for getting instance of Date, Time, and DateTime formatters.
+52. Note that functional interfaces relies on generics thus the type in the lambda expression should match that.
+    Removing the generic type will mean it will be of type Object, the lambda expression should also match that.
+54. Remember that since the abstract classes RecursiveAction and RecursiveTask both extends the abstract class ForkJoinTask then they both have fork() and join().
+    They only differ in use case, RecursiveAction doesn't return anything while RecursiveTask do.
+    fork() and join() can be used with RecursiveAction if per example you have a list that is being passed to store the result thus no return is needed.
+    If result needs to be combined then RecursiveTask must be used.
+57. File has static method File[] File.listRoots() while FileSystem has Iterable<Path> FileSystems.getDefault().getRootDirectories().
