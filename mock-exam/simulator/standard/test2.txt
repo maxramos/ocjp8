@@ -1,0 +1,48 @@
+- When declaring a consumer you can put method calls that return something on the lambda expression even though consumer have void as return.
+  Instantiation of any class is also permitted inside it.
+  What cannot be declared there is primitive literals and string literal.
+- Name of the method in the functional interface doesn't matter as long as it's a single method it will still be valid.
+- All exceptions in java.nio.file package has IOException as its superclass.
+- If view-name is not specified in view-name:attribute-name when setting a file attribute then it defaults to basic.
+- For IO classes used in try-with-resource clause it must catch or declare an IOException because of the implicit call to the close() method.
+- Day Light Saving computation is executed first prior to computing the difference between 2 time or datetime.
+- Day Light Saving is concerned with time zone. Not all regions have Day Light Saving.
+- ThreadLocalRandom.current().nextXXX(); boolean, int, long, float, double
+  ThreadLocalRandom.current().nextXXX(exclusive); int, long, double
+  ThreadLocalRandom.current().nextXXX(inclusive, exclusive); int, long, double
+- CyclicBarrier has 2 constructors:
+  CyclicBarrier(int)
+  CyclicBarrier(int, Runnable); where Runnable is executed after breaking the barrier.
+
+18. All modification operation of CopyOnWriteArrayList is atomic including addAll().
+    Only modification operation are blocked by another modification operation, readers are not blocked.
+22. Remember BasicFileAttributeView, DosFileAttributeView, PosixFileAttributeView.
+24. Threshold is recommended when using subdividing a big task like in fork/join framework to control sub task creation.
+    Bigger threshold means lesser sub tasks.
+30. Order of locale preference:
+    a. Specific Locale
+      i. messages_en_US.properties
+      ii. messages_en.properties
+    b. System Default Locale
+      i. Locale.setDefault(Locale.FRANCE)
+         messages_fr_FR.properties
+    c. No Locale
+      i. messages.properties
+35. Although parallel stream process items simultaneously the order of the output when doing a reduce will still be the same as the input collection.
+36. Stream methods: anyMatch(), allMatch(), and noneMatch all takes a Predicate as a param. And they all return a boolean.
+40. Note that those that return Optional and its primitive variants will throw a java.util.NoSuchElementException when their get()/getAsXXX() methods are called and the the Optional is empty.
+    Use Optional.orElse() method to prevent the throwing of the exception.
+45. Stream method min() and max() requires Comparator as its param and they return Optional.
+    Stream method reduce() with no identity returns an Optional.
+49. DecimalFormat doesn't have a constructor that accepts Locale but it do have public constructors that accepts pattern.
+    Since DecimalFormat extends NumberFormat it has the getXXXInstance() methods.
+    NumberFormat doesn't have public constructor.
+    For every getInstance() and getXXXInstance() methods of Number format there is a corresponding method that accepts a Locale param.
+      getInstance()
+      getNumberInstance()
+      getIntegerInstance()
+      getCurrencyInstance()
+      getPercentInstance()
+    NumberFormat, DateFormat, MessageFormat extends Format class.
+    DecimalFormat, ChoiceFormat extends NumberFormat class.
+    SimpleDateFormat extends DateFormat class.
