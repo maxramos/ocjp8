@@ -3,6 +3,8 @@ package ph.mramos.ocjp8.nio;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -181,6 +183,18 @@ public class PathTest {
 		System.out.println(path3.toRealPath());
 
 		//		C:\Users\mramos\.babun\cygwin\home\mramos\workspace
+	}
+
+	@Test
+	public void testBound() {
+		List<String> list = Arrays.asList("0", "1");
+		System.out.println(list.get(2));
+	}
+
+	@Test
+	public void testBound2() {
+		Path path = Paths.get("0/1");
+		System.out.println(path.getName(2));
 	}
 
 }

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class ExceptionTest {
 			System.out.println("Finally");
 		}
 	}
-	
+
 	@Test
 	public void testUncheckedAuto() {
 		try (UncheckedAuto ca = new UncheckedAuto()) {
@@ -29,7 +30,7 @@ public class ExceptionTest {
 			System.out.println("Finally");
 		}
 	}
-	
+
 	@Test
 	public void testThrowCheckedAuto() {
 		try (ThrowCheckedAuto ca = new ThrowCheckedAuto()) {
@@ -41,7 +42,7 @@ public class ExceptionTest {
 			System.out.println("Finally");
 		}
 	}
-	
+
 	@Test(expected = RuntimeException.class)
 	public void testThrowUncheckedAuto() {
 		try (ThrowUncheckedAuto ca = new ThrowUncheckedAuto()) {
@@ -50,7 +51,7 @@ public class ExceptionTest {
 			System.out.println("Finally");
 		}
 	}
-	
+
 	@Test
 	public void testSuppressed() {
 		try (ThrowCheckedAuto ca = new ThrowCheckedAuto()) {
@@ -70,11 +71,11 @@ public class ExceptionTest {
 			System.out.println("Finally");
 		}
 	}
-	
+
 	@Test
 	public void testMultiCatch() {
 		int test = 3;
-		
+
 		try {
 			switch (test) {
 			case 0:
@@ -92,11 +93,11 @@ public class ExceptionTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testExceptionDeclaration() throws IOException, ParseException, SQLException {
 		int test = 3;
-		
+
 		try {
 			switch (test) {
 			case 0:
@@ -113,5 +114,42 @@ public class ExceptionTest {
 			throw e;
 		}
 	}
-	
+
+	@Test
+	public void testSuppressedExceptionInTryWithResource() {
+		try {
+			implicitFinally();
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println(Arrays.toString(e.getSuppressed()));
+		}
+	}
+
+	private void implicitFinally() {
+		boolean _try = false;
+		boolean _catch = false;
+		boolean _rethrow = false;
+		boolean _finally = false;
+
+		try (ThrowCheckOrUncheckAuto auto = new ThrowCheckOrUncheckAuto("Suppressed Exception")) {
+			if (_try) {
+				throw new RuntimeException("Try Exception");
+			}
+
+			if (_catch) {
+				throw new IllegalArgumentException();
+			}
+		} catch (IllegalArgumentException e) {
+			if (_rethrow) {
+				throw e;
+			} else {
+				throw new RuntimeException("Catch Exception");
+			}
+		} finally {
+			if (_finally) {
+				throw new RuntimeException("Finally Exception");
+			}
+		}
+	}
+
 }
