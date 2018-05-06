@@ -46,6 +46,10 @@ public class PathTest {
 		Path path = Paths.get("/ocjp/test/PathTest.java");
 		System.out.println(path.getParent());
 		System.out.println(path.getRoot());
+
+		path = Paths.get("c:\\ocjp\\test\\PathTest.java");
+		System.out.println(path.getParent());
+		System.out.println(path.getRoot());
 	}
 
 	@Test
@@ -79,6 +83,11 @@ public class PathTest {
 
 		//		..\..\target\classes
 		//		..\..\src\main
+
+		Path p1 = Paths.get("c:\\personal\\.\\photos\\..\\readme.txt");
+		Path p2 = Paths.get("c:\\personal\\index.html");
+		Path p3 = p1.relativize(p2);
+		System.out.println(p3);
 	}
 
 	@Test

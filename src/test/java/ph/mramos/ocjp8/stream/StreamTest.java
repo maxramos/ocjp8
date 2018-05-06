@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class StreamTest {
 		Stream<Integer> stream5 = Stream.iterate(0, e -> e + 1);
 		Stream<Integer> stream6 = Stream.concat(stream2, stream3);
 	}
-	
+
 	@Test
 	public void testStream() {
 		List<String> list = Arrays.asList("a", "bb", "ccc", "dddd", "eeeee", "eeeee");
@@ -95,12 +96,31 @@ public class StreamTest {
 		Integer sumParallel = list.parallelStream().reduce(0, (x, y) -> x + y, (x, y) -> x + y);
 		System.out.println(sumParallel);
 	}
-	
+
 	@Test
 	public void testInfiniteStream() {
 		System.out.println(Stream.iterate("-", e-> e + e).allMatch(e -> e.length() > 3));
 		System.out.println(Stream.iterate("-", e-> e + e).anyMatch(e -> e.length() > 3));
 		System.out.println(Stream.iterate("-", e-> e + e).noneMatch(e -> e.length() > 3));
+	}
+
+	@Test
+	public void testFindAny() {
+		for (int i = 0; i < 100; i++) {
+			Optional<Integer> v1 = IntStream.rangeClosed(10, 15)
+					.boxed()
+					.filter(x->x>12)
+					.parallel()
+					.findAny();
+			System.out.println(v1.get());
+			Optional<Integer> v2 = IntStream.rangeClosed(10, 15)
+					.boxed()
+					.filter(x->x>12)
+					.sequential()
+					.findAny();
+			System.out.println(v2.get());
+			System.out.println();
+		}
 	}
 
 }

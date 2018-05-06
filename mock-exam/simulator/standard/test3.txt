@@ -1,0 +1,44 @@
+- In printing Period and Duration, if one part has zero value then it will be ommitted.
+  P1Y1D
+  PT1H1S
+- A child interface can override its parent interface' default method using an abstract method.
+  This allows the previously concrete default method of the parent interface to be converted to being an abstract method (abstract modifier is optional).
+- Values for the switch cases must be at least compile time constants.
+  Meaning their values are known at compile time and not on runtime.
+ - Note that for Path.startWith() to return true the param should include the leading directory (starting from the root if it's absolute).
+ - Logic is messed up when Stream.max() is combined with a comparator using max logic like Integer.max()
+
+
+1. Overlooked, lambda expression must take care not to redeclare variables that are already declared outside of it.
+4. Optional.of(Object) can't have a null param; It will throw a NullPointerException.
+   This is different from Optional.empty() where it will throw a NoSuchElementException when its Optional.get() method is called.
+   Prefer using Optional.orElse(Object) is the param can be null.
+5. State of a WatchKey:
+   - ready: the moment that a WatchService is instantiated the WatchKey's state is ready; for every call to WatchKey.reset() it will return the state to ready.
+   - signaled: the moment that an event was detected the state will be change to signaled and the WatchKey instance can be retrieve using the poll() or take() methods.
+               WatchEvent can be retrieve using WatchKey.pollEvents().
+   - invalid (though implicit): throwing an exception, calling WatchKey.cancel(), or closing the WatchService will make the WatchKey invalid.
+6. Overlooked, WatchKey.reset() must be called before calling WatchService.take() or poll() to get another WatchKey instance.
+   Otherwise the take() will be stuck and events that occurs after that will be lost.
+15. Overlooked, lambda expression must take care not to redeclare variables that are already declared outside of it. (#2 ref no.1)
+20. Lambda declared variable is NOT final and thus you can assign a new value to it but it won't change what is in the stream.
+22. Map.merge(key, newVal, BiFunction); BiFunction<oldVal,newVal,mergedVal>
+    Map.compute(key, BiFunction); BiFunction<key,oldVal,newVal>
+    Map.computeIfPresent(key, BiFunction); BiFunction<key,oldVal,newVal>
+    Map.computeIfAbsent(key, Function); Function<key,newVal>
+23. The root for DOS related path is c:\ while in unix it's \
+    Note that in DOS root the \ is included with the drive letter.
+29. There is no AtomicXXX.increment() and AtomicXXX.add(num) mthods.
+    Instead use AtomicXXX.incrementAndGet() and AtomicXXX.addAndGet(num) mthods.
+33. Vague question, Specific locale messages must be match to locale specific property file.
+41. Overlooked, lambda expression must take care not to redeclare variables that are already declared outside of it. (#3 ref no.1)
+50. Note that Path.relativize() does not normalize the path therefore even .. and . must be considered as a directory on its own.
+52. Worker thread in ForkJoinPool do extend java.lang.Thread and are created by the default thread factory.
+53. Stream.findAny() is designed to be non deterministic even for sequential stream so there's no guarantee that the actual result will be the first result.
+    Use Stream.findFirst to get the actual first result based on the encounter order of the input collection.
+56. In computing timezone difference between UTC and a Zoned date time. 
+    A + means add to the UTC while - means subtract from the UTC.
+    ex: changing from UTC to UTC+2; 3:00 becomes 5:00; changing from UTC to UTC-2; 3:00 becomes 1:00
+    In the otherhand if your computing the difference between a Zoned date time and UTC then do the reverse.
+    A + means subtract from Zoned date time while - means add to the Zoned date time.
+	ex: changing from UTC+2 to UTC; 3:00 becomes 1:00; changing from UTC-2 to UTC; 3:00 becomes 5:00
