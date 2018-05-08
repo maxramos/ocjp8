@@ -14,26 +14,32 @@ public class GenericsTest {
 		addNumber(intList);
 		System.out.println(getNumber(intList));
 		System.out.println(getNumberWildcard(intList));
-		
+
 		List<? extends Integer> numList = new ArrayList<>();
-//		numList.add(20); compile error
+		//		numList.add(20); compile error
 		System.out.println(getNumber(numList));
+
+		List<?> list = getList();
 	}
-	
+
 	private Number getNumber(List<? extends Number> list) {
-//		list.add(1); compile error
+		//		list.add(1); compile error
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
+
 	private void addNumber(List<? super Integer> list) {
 		list.add(30);
 		Object obj = list.get(0);
-//		Integer num = list.get(0); compile error
+		//		Integer num = list.get(0); compile error
 	}
-	
+
 	private Object getNumberWildcard(List<?> list) {
-//		list.add(new Object()); compile error
+		//		list.add(new Object()); compile error
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
+
+	private List<? extends String> getList() {
+		return new ArrayList<>();
+	}
+
 }

@@ -9,22 +9,22 @@
   As long a part exist to satisfy the required part of the formatter.
 - Use FileVisitResult.SKIP_SUBTREE in preVisitDirectory()
   Use FileVisitResult.SKIP_SIBLINGS in visitFileFailed()
-- Remembe that in glob ? means exactly 1 character while in regex it's zero or one (optional)
+- Remember that in glob ? means exactly 1 character while in regex it's zero or one (optional)
 
 1. Overlooked, a parallel stream can process all elements even if there's a filter specially when running on multiple cores.
 2. Overlooked, didn't notice the last choice; the only required change to work with generics is to add generic type to the declaration.
 4. When an exception is thrown in the finally block then previous exception in the catch or try clause will be lost.
    When an exception thrown in the catch block (and not in the finally) then previous exception in the try clause will be lost (including suppressed exception if it contains one).
    There will only be suppressed exception if both the try clause and the implicit close of the try-with-resource throws an exception.
-10. Note that Format.parse() method (including Format subclasses) throws a checked exception of ParseExceptio; take care not to overlook this.
-12. Remember that Collectors.mapping(Function, Collector) has only one variant and it accepts to params; It must have the downstream like Collectors.toList().
+10. Note that Format.parse() method (including Format subclasses) throws a checked exception of ParseException; take care not to overlook this.
+12. Remember that Collectors.mapping(Function, Collector) has only one variant and it accepts 2 params; It must have the downstream like Collectors.toList().
 15. Note that a ResourceBundle has 2 subclass:
     PropertyResourceBundle
     ListResourceBundle
     ResourceBundle has the following method:
     String getString(String)
     String[] getStringArray(String); only works with ListResourceBundle
-    Object getObject(String); only works with ListResourceBundle
+    Object getObject(String)
 20. When printing a Duration, any overflow in second and minute part will be carried over to the next bigger part.
     61sec becomes PT1M1S
     61min becomes PT1H1M

@@ -19,21 +19,21 @@ public class OptionalTest {
 
 		Optional<String> opt3 = Optional.ofNullable(null);
 		opt3.ifPresent(System.out::println);
-		
+
 		// int
 		OptionalInt opt4 = OptionalInt.empty();
 		opt4.ifPresent(System.out::println);
 
 		OptionalInt opt5 = OptionalInt.of(1);
 		opt5.ifPresent(System.out::println);
-		
+
 		// long
 		OptionalLong opt6 = OptionalLong.empty();
 		opt6.ifPresent(System.out::println);
 
 		OptionalLong opt7 = OptionalLong.of(1L);
 		opt7.ifPresent(System.out::println);
-		
+
 		// double
 		OptionalDouble opt8 = OptionalDouble.empty();
 		opt8.ifPresent(System.out::println);
@@ -69,13 +69,13 @@ public class OptionalTest {
 		Optional<String> opt2 = Optional.empty();
 		String result2 = opt2.isPresent() ? opt1.get() : null;
 		System.out.println(result2);
-		
+
 		OptionalInt opt3 = OptionalInt.of(1);
 		System.out.println(opt3.getAsInt());
-		
+
 		OptionalLong opt4 = OptionalLong.of(1L);
 		System.out.println(opt4.getAsLong());
-		
+
 		OptionalDouble opt5 = OptionalDouble.of(1D);
 		System.out.println(opt5.getAsDouble());
 	}
@@ -111,5 +111,14 @@ public class OptionalTest {
 		System.out.println(opt1.equals(opt2));
 
 		System.out.println("test".hashCode() + ":" + opt1.hashCode());
+	}
+
+	@Test
+	public void testOrElseGet() {
+		Optional<String> optional = Optional.ofNullable(null);
+		String result = optional.orElseGet(null); // must have a valid Supplier
+		System.out.println(result);
+		String result2 = optional.orElse(null);
+		System.out.println(result2);
 	}
 }

@@ -1,5 +1,5 @@
 - Only compile time constants (i.e. final variables are allowed in the switch case).
-- If both Optional.ofNullable() and Optioanl.orElseGet(Supplier) are null then Optional.orElseGet() will throw a NullPointerException.
+- If both Optional.ofNullable() and Optioanl.orElseGet(Supplier) are null (i.e. orElseGet() has null Supplier; Supplier can return null) then Optional.orElseGet() will throw a NullPointerException.
 - A super interface' default method can be redeclared as an abstract in the child interface.
   A super interface' abstract method can be implemented using a default method of the child interface. 
 - Remember that only . and .. are valid in Paths.get() and not * or **.
@@ -7,7 +7,7 @@
   It can however cancel out other parent directory.
 - when using Path.subpath() the result does not start or end with \
 - Intant.truncatedTo() truncates the smaller parts to 0.
-  In an instant the truncatedTo() will throw an UnsupportedTemporalTypeException if the ChronoUnit is bigger that DAYS.
+  In an instant the truncatedTo() will throw an UnsupportedTemporalTypeException if the ChronoUnit is bigger than DAYS.
 - Only LocalDate doesn't support the method truncatedTo().
 
 2. Overlooked, remember that only final or implicitly final local variables are allowed in inner class or a lambda expression.
