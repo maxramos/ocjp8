@@ -1,0 +1,3 @@
+- Apparently the combination of StandardOpenOption.READ and StandardOpenOption.SYNC is valid. It is platform dependent.
+- Though DateFormat does not have getInstace() or getXXXInstance() that solely takes a Locale param,
+  the NumberFormat does have getInstance() or getXXXInstance() that accepts a single Local param.
