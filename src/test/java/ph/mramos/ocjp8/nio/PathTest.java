@@ -90,6 +90,13 @@ public class PathTest {
 		Path p2 = Paths.get("c:\\personal\\index.html");
 		Path p3 = p1.relativize(p2);
 		System.out.println(p3);
+
+		Path pathA = Paths.get("c:\\personal\\.\\photos\\..\\readme.txt");
+		Path pathB = Paths.get("c:\\personal\\index.html");
+		Path pathC = pathA.relativize(pathB);
+		System.out.println(pathC);
+
+		//		..\..\..\..\index.html
 	}
 
 	@Test

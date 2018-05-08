@@ -1,0 +1,13 @@
+- Format style constant is in the DateFormat class.
+- DateFormat has no getInstance() or getInstanceXXX() methods that takes only Locale object.
+- StandardCopyOption.ATOMIC_MOVE is platform dependent, it might succeed or not, look at the next line which is the Files.delete() which is sure to throw an exception of file does not exist.
+- There's no Locale.getDefaultLocale(), there's only Locale.getDefaul().
+- parse() method of DateFormat and NumberFormat throws java.text.ParseException.
+
+16. If no specific locale property file is found then a system default locale will be loaded if it exist, if not then a no locale property will be loaded.
+    Order if default locale is fr_CA but specified locale is jp_JP but no jp_JP property file is found:
+    messages_jp_JP.properties
+    messages_jp.properties
+    messages_fr_CA.properties
+    Last resort is messages.properties
+    
