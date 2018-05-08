@@ -20,7 +20,7 @@
 11. Overlooked, Remember that in Stream if a terminal operation has not been called then no processing will occur even if you have a peek() somewhere in between.
 12. Lock.lock() and Lock.unlock() have no return values (i.e. void) while Lock.tryLock() returns boolean.
 22. To Map:
- Collectors.toMap(Function keyMapper, Function valueMapper) does not accept duplicate.
+ Collectors.toMap(Function keyMapper, Function valueMapper) does not accept duplicate; duplicate will cause an exception to be thrown.
  Collectors.toMap(Function keyMapper, Function valueMapper, BinaryOperator mergeFunction) can accept duplicate because of the 3rd param.
  Collectors.toMap(Function keyMapper, Function valueMapper, BinaryOperator mergeFunction, Supplier mapSupplier)
 23. Overlooked, trace carefully when going through a threading question.
