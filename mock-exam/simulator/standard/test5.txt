@@ -1,0 +1,36 @@
+- Only compile time constants (i.e. final variables are allowed in the switch case).
+- If both Optional.ofNullable() and Optioanl.orElseGet(Supplier) are null then Optional.orElseGet() will throw a NullPointerException.
+- A super interface' default method can be redeclared as an abstract in the child interface.
+  A super interface' abstract method can be implemented using a default method of the child interface. 
+- Remember that only . and .. are valid in Paths.get() and not * or **.
+- .. can never cancel out the root directory.
+  It can however cancel out other parent directory.
+- when using Path.subpath() the result does not start or end with \
+- Intant.truncatedTo() truncates the smaller parts to 0.
+  In an instant the truncatedTo() will throw an UnsupportedTemporalTypeException if the ChronoUnit is bigger that DAYS.
+- Only LocalDate doesn't support the method truncatedTo().
+
+2. Overlooked, remember that only final or implicitly final local variables are allowed in inner class or a lambda expression.
+7. Overlooked, Note that binary only contains 0 or 1.
+   Floating point symbol are not allowed in binary.
+   In 0x10000f, f is interpreted as a hex character and not a float symbol.
+   f or F is only allowed in decimal or hexadecimal literals.
+9. When the declared locale is not passed to the getInstance() methods of the Format related class then the default locale is used.
+   Even if it's not passed in the getInstance() methods the default locale of the OS will be used.
+   Internationalization is not automatic, the code and pages must be updated to support localization.
+24. When computing the difference between 2 zoned date time always compute it in a straight way then apply later the sign to make it simple.
+    The sign depends which of the 2 is bigger. Daylight Time saving can affect the result.
+    Example:
+      To compute the difference between 2am and 1am, switch the operator then compute how many hours will it take to go from 1am to 2am.
+      Depending on the daylight saving add or subtract 1 hour first before computing the difference.
+      When daylight saving is in place then the result is -2 hours difference.
+    Remember that the moment that it reach 2am it will go back to 1am but that's one time only so you can still go to 2am in the next hour.
+    This is only true at the end of the daylight time saving (e.g Nov) and not at the start (e.g Mar)
+34. Take note of Collectors.mapping(mappingFunction, downStreamCollector) and Collectors.summarizingInt(mappingFunction)
+35. Very tricky, the only allowable reference that List<? super String> can be stored is in the raw type List.
+    List result = some_method_that_returns List<? super String>
+36. Overlooked, remember that Callable allows the throwing of an exception.
+40. Overlooked, Supplier has only the method get().
+46. Overlooked, remember that in reduce the identity is only applied once.
+50. Overlooked, remember that if the result of the stream operation is not assigned.
+    It will not affect the original collection.
