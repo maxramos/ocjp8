@@ -1,0 +1,6 @@
+24. When visiting files recursively using FileVisitor the Path passed to the visitFile() method is a path containing its parent directory (possible absolute or relative).
+    Given that, the PathMatcher must have a a glob of **.java instead of *.java or else it won't match anything.
+    Use Path.getFileName() to get the file name only, then it is now possible to just use *.java
+29. Remember that Optional needs a generic to match the declaration of the lambda expression.
+    Otherwise use Object as the type in the lambda expression if it's possible.
+60. Remember, DateFormat and NumberFormat parse() method throws ParseException.
