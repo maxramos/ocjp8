@@ -10,6 +10,8 @@
 - Use FileVisitResult.SKIP_SUBTREE in preVisitDirectory()
   Use FileVisitResult.SKIP_SIBLINGS in visitFileFailed()
 - Remember that in glob ? means exactly 1 character while in regex it's zero or one (optional)
+- Remember that when printing Map of keys that is integers even if it's HashMap it is ordered by the integer's hashcode which is its value itself.
+- anyMatch returns boolean and not Optional.
 
 1. Overlooked, a parallel stream can process all elements even if there's a filter specially when running on multiple cores.
 2. Overlooked, didn't notice the last choice; the only required change to work with generics is to add generic type to the declaration.
