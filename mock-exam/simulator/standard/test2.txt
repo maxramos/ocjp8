@@ -13,6 +13,9 @@
 - CyclicBarrier has 2 constructors:
   CyclicBarrier(int)
   CyclicBarrier(int, Runnable); where Runnable is executed after breaking the barrier.
+- Stream has no toMap() method. Collectors is the one that has that method.
+  Collectors.toMap() does not allow duplicate key, it will throw an exception, Use instead the variant with a merger BiFunction.
+- LocalDateTime.parse throws DateTimeFormatterException which is a runtime exception unlike DateFormat.parse which throws a check exception ParseException that must be explicitly handled or declared.
 
 18. All modification operation of CopyOnWriteArrayList is atomic including addAll().
     Only modification operation are blocked by another modification operation, readers are not blocked.
