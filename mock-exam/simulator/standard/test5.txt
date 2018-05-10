@@ -9,6 +9,12 @@
 - Intant.truncatedTo() truncates the smaller parts to 0.
   In an instant the truncatedTo() will throw an UnsupportedTemporalTypeException if the ChronoUnit is bigger than DAYS.
 - Only LocalDate doesn't support the method truncatedTo().
+- Stream doesn't have sun() method. It has max() method.
+- Stream.forEach() for a List expects a Consumer as the param.
+- The difference between a ZoneDateTime when it was created from LocalDateTime can never be 0 unless the 2 LocalDateTime is exactly the same.
+  Might be confusing specially after a day light saving changes.
+  Remember to not apply the day light saving changes when just creating a ZoneDateTime from LocalDateTime.
+  Apply the day light saving only when calculating the difference.
 
 2. Overlooked, remember that only final or implicitly final local variables are allowed in inner class or a lambda expression.
 7. Overlooked, Note that binary only contains 0 or 1.
