@@ -15,6 +15,29 @@
   Might be confusing specially after a day light saving changes.
   Remember to not apply the day light saving changes when just creating a ZoneDateTime from LocalDateTime.
   Apply the day light saving only when calculating the difference.
+- Collectors methods:
+  averagingXXX(ToXXXFunction)
+  summingXXX(ToXXXFunction)
+  summarizingXXX(ToXXXFunction)
+  maxBy(Comparator)
+  minBy(Comparator)
+  counting()
+  joining()
+  joining(CharSequence)
+  joining(CharSequence, CharSequence, CharSequence)
+  mapping(Function, Collector)
+  reducing(BinaryOperator)
+  reducing(T, BinaryOperator)
+  groupingBy(Function)
+  groupingBy(Function, Collector)
+  partitioningBy(Predicate)
+  partitioningBy(Predicate, Collector)
+  toList()
+  toSet()
+  toMap(Function, Function)
+  toMap(Function, Function, BinaryOperator)
+  
+  
 
 2. Overlooked, remember that only final or implicitly final local variables are allowed in inner class or a lambda expression.
 7. Overlooked, Note that binary only contains 0 or 1.
