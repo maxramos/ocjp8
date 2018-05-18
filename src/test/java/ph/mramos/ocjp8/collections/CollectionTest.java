@@ -124,7 +124,7 @@ public class CollectionTest {
 		System.out.println(map);
 		map.merge("a", "aaa", (k, v) -> v.toUpperCase());
 		System.out.println(map);
-		
+
 		System.out.println("\n5. [key:present] [value:non-null] [function:null] [result:remove mapping]");
 		map = new LinkedHashMap<>();
 		map.put("a", "aa");
@@ -169,7 +169,7 @@ public class CollectionTest {
 		System.out.println(map);
 		map.compute("a", (k, v) -> k.toUpperCase());
 		System.out.println(map);
-		
+
 		System.out.println("\n5. [key:present] [value:non-null] [function:null] [result:remove mapping]");
 		map = new LinkedHashMap<>();
 		map.put("a", "aa");
@@ -214,7 +214,7 @@ public class CollectionTest {
 		System.out.println(map);
 		map.computeIfAbsent("a", k -> k.toUpperCase());
 		System.out.println(map);
-		
+
 		System.out.println("\n5. [key:present] [value:non-null] [function:null] [result:not executed]");
 		map = new LinkedHashMap<>();
 		map.put("a", "aa");
@@ -259,7 +259,7 @@ public class CollectionTest {
 		System.out.println(map);
 		map.computeIfPresent("a", (k, v) -> v.toUpperCase());
 		System.out.println(map);
-		
+
 		System.out.println("\n5. [key:present] [value:non-null] [function:null] [result:remove mapping]");
 		map = new LinkedHashMap<>();
 		map.put("a", "aa");
@@ -273,6 +273,18 @@ public class CollectionTest {
 		System.out.println(map);
 		map.computeIfPresent("a", (k, v) -> v.toUpperCase());
 		System.out.println(map);
+	}
+
+	@Test
+	public void testReifiableTypes() {
+		List<Integer> intList = new ArrayList<>();
+		intList.add(1);
+		List rawList = intList;
+		rawList.add("2");
+
+		for (Integer i : intList) {
+			System.out.println(i);
+		}
 	}
 
 }
